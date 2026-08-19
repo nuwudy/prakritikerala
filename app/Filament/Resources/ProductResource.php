@@ -23,6 +23,11 @@ class ProductResource extends Resource
     {
         return $schema
             ->schema([
+                Forms\Components\Select::make('category_id')
+                    ->relationship('category', 'name')
+                    ->required()
+                    ->searchable()
+                    ->preload(),
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
@@ -47,6 +52,11 @@ class ProductResource extends Resource
                     ->directory('product-images')
                     ->acceptedFileTypes(['image/webp', 'image/jpeg', 'image/png'])
                     ->maxSize(2048),
+                Forms\Components\FileUpload::make('video_url')
+                    ->label('Product Short Video')
+                    ->directory('product-videos')
+                    ->acceptedFileTypes(['video/mp4', 'video/webm', 'video/quicktime'])
+                    ->maxSize(51200),
                 Forms\Components\FileUpload::make('images')
                     ->label('Gallery Images')
                     ->image()
@@ -54,10 +64,6 @@ class ProductResource extends Resource
                     ->directory('product-images')
                     ->acceptedFileTypes(['image/webp', 'image/jpeg', 'image/png'])
                     ->maxSize(2048),
-                Forms\Components\TextInput::make('video_url')
-                    ->label('Video Embed URL (YouTube/Vimeo)')
-                    ->url()
-                    ->maxLength(255),
             ]);
     }
 
