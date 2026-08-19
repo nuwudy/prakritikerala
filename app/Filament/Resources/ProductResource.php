@@ -30,8 +30,11 @@ class ProductResource extends Resource
                     ->preload(),
                 Forms\Components\TextInput::make('name')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->live(onBlur: true)
+                    ->afterStateUpdated(fn (string $operation, $state, Forms\Set $set) => $operation === 'create' ? $set('slug', \Illuminate\Support\Str::slug($state)) : null),
                 Forms\Components\TextInput::make('slug')
+                    ->required()
                     ->unique(table: Product::class, column: 'slug', ignoreRecord: true)
                     ->maxLength(255),
                 Forms\Components\Textarea::make('description')

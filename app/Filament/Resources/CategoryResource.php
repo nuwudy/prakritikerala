@@ -28,6 +28,12 @@ class CategoryResource extends Resource
             ->schema([
                 TextInput::make('name')
                     ->required()
+                    ->maxLength(255)
+                    ->live(onBlur: true)
+                    ->afterStateUpdated(fn (string $operation, $state, Forms\Set $set) => $operation === 'create' ? $set('slug', \Illuminate\Support\Str::slug($state)) : null),
+                TextInput::make('slug')
+                    ->required()
+                    ->unique(table: Category::class, column: 'slug', ignoreRecord: true)
                     ->maxLength(255),
             ]);
     }
