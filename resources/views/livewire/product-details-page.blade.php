@@ -57,8 +57,11 @@
                             @endphp
                             <iframe class="w-full h-full" src="https://player.vimeo.com/video/{{ $videoId }}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                         @else
+                            @php
+                                $videoSrc = str_starts_with($product->video_url, 'http') ? $product->video_url : asset('storage/' . $product->video_url);
+                            @endphp
                             <video class="w-full h-full object-cover" controls>
-                                <source src="{{ $product->video_url }}" type="video/mp4">
+                                <source src="{{ $videoSrc }}" type="video/mp4">
                             </video>
                         @endif
                     </div>
