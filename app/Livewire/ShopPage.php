@@ -43,6 +43,12 @@ class ShopPage extends Component
         $this->resetPage();
     }
 
+    public function resetFilters()
+    {
+        $this->reset(['search', 'category', 'minPrice', 'maxPrice']);
+        $this->resetPage();
+    }
+
     public function render()
     {
         $query = Product::active()->with(['category', 'variants']);

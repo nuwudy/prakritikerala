@@ -57,7 +57,7 @@
                     <!-- Reset Filters button -->
                     @if($search || $category || $minPrice || $maxPrice)
                         <div class="mt-6 pt-6 border-t border-gray-100">
-                            <button wire:click="$reset(['search', 'category', 'minPrice', 'maxPrice'])" class="w-full text-center text-sm text-red-500 hover:text-red-700 font-medium transition-colors">
+                            <button wire:click="resetFilters" class="w-full text-center text-sm text-red-500 hover:text-red-700 font-medium transition-colors">
                                 Clear All Filters
                             </button>
                         </div>
@@ -140,7 +140,7 @@
                         </svg>
                         <h3 class="text-lg font-medium text-gray-900">No products found</h3>
                         <p class="mt-2 text-sm text-gray-500">We couldn't find anything matching your current filters.</p>
-                        <button wire:click="$reset(['search', 'category', 'minPrice', 'maxPrice'])" class="mt-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-colors">
+                        <button wire:click="resetFilters" class="mt-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-colors">
                             Clear all filters
                         </button>
                     </div>
