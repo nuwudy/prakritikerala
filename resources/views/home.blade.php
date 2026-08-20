@@ -72,7 +72,7 @@
                 @foreach($pickedForYouProducts as $product)
                 <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition duration-500 transform hover:-translate-y-2 group flex flex-col h-full border border-gray-100">
                     <div class="relative h-64 overflow-hidden bg-gray-100">
-                        <img src="{{ asset('images/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                        <img src="{{ $product->mainImage ? $product->mainImage->url : 'https://placehold.co/400x500/e2e8f0/475569?text=No+Image' }}" alt="{{ $product->name }}" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
                     </div>
                     <div class="p-6 flex flex-col flex-grow relative">
                         <h3 class="text-xl font-heading font-semibold mb-2 text-kerala-dark">{{ $product->name }}</h3>
@@ -105,7 +105,7 @@
                 @forelse($trendingProducts as $product)
                 <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition duration-500 transform hover:-translate-y-2 group flex flex-col h-full border border-gray-100">
                     <div class="relative h-72 overflow-hidden bg-gray-100">
-                        <img src="{{ asset('images/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                        <img src="{{ $product->mainImage ? $product->mainImage->url : 'https://placehold.co/400x500/e2e8f0/475569?text=No+Image' }}" alt="{{ $product->name }}" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
                         <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-sm text-kerala-spice">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -156,7 +156,7 @@
                 @forelse($latestProducts as $product)
                 <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition duration-500 transform hover:-translate-y-2 group flex flex-col h-full border border-gray-100">
                     <div class="relative h-72 overflow-hidden bg-gray-100">
-                        <img src="{{ asset('images/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                        <img src="{{ $product->mainImage ? $product->mainImage->url : 'https://placehold.co/400x500/e2e8f0/475569?text=No+Image' }}" alt="{{ $product->name }}" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
                         <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-sm text-kerala-spice">
                             <span class="text-xs font-bold uppercase tracking-wider">New</span>
                         </div>

@@ -49,24 +49,14 @@ class ProductResource extends Resource
                 Forms\Components\TextInput::make('picked_for_you_order')
                     ->numeric()
                     ->label('Picked For You Order (1 is first)'),
-                Forms\Components\FileUpload::make('image')
-                    ->label('Primary Image')
-                    ->image()
-                    ->directory('product-images')
-                    ->acceptedFileTypes(['image/webp', 'image/jpeg', 'image/png'])
-                    ->maxSize(2048),
-                Forms\Components\FileUpload::make('images')
+                \Awcodes\Curator\Components\Forms\CuratorPicker::make('image')
+                    ->label('Primary Image'),
+                \Awcodes\Curator\Components\Forms\CuratorPicker::make('images')
                     ->label('Gallery Images')
-                    ->image()
-                    ->multiple()
-                    ->directory('product-images')
-                    ->acceptedFileTypes(['image/webp', 'image/jpeg', 'image/png'])
-                    ->maxSize(2048),
-                Forms\Components\FileUpload::make('video_url')
+                    ->multiple(),
+                \Awcodes\Curator\Components\Forms\CuratorPicker::make('video_url')
                     ->label('Product Video')
-                    ->directory('product-videos')
-                    ->acceptedFileTypes(['video/mp4', 'video/webm', 'video/ogg'])
-                    ->maxSize(51200), // 50MB max size for video
+                    ->acceptedFileTypes(['video/mp4', 'video/webm', 'video/ogg']),
 
             ]);
     }
@@ -80,7 +70,8 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('category.name')->label('Category')->searchable(),
                 Tables\Columns\IconColumn::make('is_active')->boolean()->sortable(),
                 Tables\Columns\TextColumn::make('picked_for_you_order')->sortable(),
-                Tables\Columns\ImageColumn::make('image')->circular(),
+                \Awcodes\Curator\Components\Tables\CuratorColumn::make('image')
+                    ->circular(),
                 Tables\Columns\TextColumn::make('created_at')->dateTime()->sortable(),
             ])
             ->filters([

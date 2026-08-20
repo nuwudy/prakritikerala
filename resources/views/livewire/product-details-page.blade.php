@@ -13,60 +13,44 @@
         <div class="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
             
             <!-- Image & Media Section -->
-            <div class="lg:max-w-lg lg:self-end" x-data="{ activeImage: '{{ $product->image ? Storage::disk('public')->url($product->image) : 'https://placehold.co/800x1000/e2e8f0/475569?text=No+Image' }}' }">
-                <!-- Main Image -->
-                <div class="aspect-[4/5] rounded-2xl overflow-hidden bg-gray-100 shadow-sm border border-gray-100 mb-4">
-                    <img x-bind:src="activeImage" alt="{{ $product->name }}" class="w-full h-full object-cover object-center transition-all duration-300">
+            <div class="lg:max-w-lg lg:self-end" x-data="{ 
+                activeMediaUrl: '{{ $product->mainImage ? $product->mainImage->url : 'https://placehold.co/800x1000/e2e8f0/475569?text=No+Image' }}',
+                activeMediaType: 'image'
+            }">
+                <!-- Main Viewer -->
+                <div class="aspect-[4/5] rounded-2xl overflow-hidden bg-gray-100 shadow-sm border border-gray-100 mb-4 flex items-center justify-center" :class="{ 'bg-black': activeMediaType === 'video' }">
+                    <template x-if="activeMediaType === 'image'">
+                        <img x-bind:src="activeMediaUrl" alt="{{ $product->name }}" class="w-full h-full object-cover object-center transition-all duration-300">
+                    </template>
+                    <template x-if="activeMediaType === 'video'">
+                        <video x-bind:src="activeMediaUrl" controls autoplay class="w-full h-full object-contain"></video>
+                    </template>
                 </div>
                 
                 <!-- Gallery Thumbnails -->
-                @if($product->images && count($product->images) > 0)
                 <div class="grid grid-cols-4 gap-4">
+                    <!-- Video thumbnail (FIRST POSITION) -->
+                    @if($product->productVideo)
+                    <button @click="activeMediaUrl = '{{ $product->productVideo->url }}'; activeMediaType = 'video'" type="button" class="aspect-square rounded-lg overflow-hidden bg-black flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-emerald-500 ring-offset-1 relative group">
+                        <svg class="w-12 h-12 text-white opacity-80 group-hover:opacity-100 absolute z-10 transition-opacity" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        <video src="{{ $product->productVideo->url }}" class="w-full h-full object-cover opacity-60"></video>
+                    </button>
+                    @endif
+
                     <!-- Primary image thumbnail -->
-                    @if($product->image)
-                    <button @click="activeImage = '{{ Storage::disk('public')->url($product->image) }}'" type="button" class="aspect-square rounded-lg overflow-hidden bg-gray-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 ring-offset-1">
-                        <img src="{{ Storage::disk('public')->url($product->image) }}" class="w-full h-full object-cover" alt="Thumbnail">
+                    @if($product->mainImage)
+                    <button @click="activeMediaUrl = '{{ $product->mainImage->url }}'; activeMediaType = 'image'" type="button" class="aspect-square rounded-lg overflow-hidden bg-gray-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 ring-offset-1">
+                        <img src="{{ $product->mainImage->url }}" class="w-full h-full object-cover" alt="Thumbnail">
                     </button>
                     @endif
                     
                     <!-- Additional Gallery images -->
-                    @foreach($product->images as $galleryImage)
-                    <button @click="activeImage = '{{ Storage::disk('public')->url($galleryImage) }}'" type="button" class="aspect-square rounded-lg overflow-hidden bg-gray-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 ring-offset-1">
-                        <img src="{{ Storage::disk('public')->url($galleryImage) }}" class="w-full h-full object-cover" alt="Thumbnail">
+                    @foreach($product->gallery_images as $galleryImage)
+                    <button @click="activeMediaUrl = '{{ $galleryImage->url }}'; activeMediaType = 'image'" type="button" class="aspect-square rounded-lg overflow-hidden bg-gray-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 ring-offset-1">
+                        <img src="{{ $galleryImage->url }}" class="w-full h-full object-cover" alt="Thumbnail">
                     </button>
                     @endforeach
                 </div>
-                @endif
-                
-                <!-- Video Section -->
-                @if($product->video_url)
-                <div class="mt-8">
-                    <h3 class="text-sm font-bold text-gray-900 mb-3 uppercase tracking-wider">Product Video</h3>
-                    <div class="aspect-video rounded-xl overflow-hidden shadow-sm bg-black">
-                        @if(\Illuminate\Support\Str::contains($product->video_url, ['youtube.com', 'youtu.be']))
-                            @php
-                                $videoId = '';
-                                if(preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/\s]{11})%i', $product->video_url, $match)){
-                                    $videoId = $match[1];
-                                }
-                            @endphp
-                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/{{ $videoId }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        @elseif(\Illuminate\Support\Str::contains($product->video_url, ['vimeo.com']))
-                            @php
-                                $videoId = substr(parse_url($product->video_url, PHP_URL_PATH), 1);
-                            @endphp
-                            <iframe class="w-full h-full" src="https://player.vimeo.com/video/{{ $videoId }}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                        @else
-                            @php
-                                $videoSrc = str_starts_with($product->video_url, 'http') ? $product->video_url : Storage::disk('public')->url($product->video_url);
-                            @endphp
-                            <video class="w-full h-full object-cover" controls>
-                                <source src="{{ $videoSrc }}" type="video/mp4">
-                            </video>
-                        @endif
-                    </div>
-                </div>
-                @endif
             </div>
 
             <!-- Product Info Section -->

@@ -41,6 +41,22 @@ class Product extends Model
         return $this->hasMany(ProductVariant::class);
     }
 
+    public function mainImage()
+    {
+        return $this->belongsTo(\Awcodes\Curator\Models\Media::class, 'image');
+    }
+
+    public function productVideo()
+    {
+        return $this->belongsTo(\Awcodes\Curator\Models\Media::class, 'video_url');
+    }
+
+    public function getGalleryImagesAttribute()
+    {
+        if (empty($this->images)) return collect();
+        return \Awcodes\Curator\Models\Media::whereIn('id', $this->images)->get();
+    }
+
     public function reviews()
     {
         return $this->hasMany(Review::class);

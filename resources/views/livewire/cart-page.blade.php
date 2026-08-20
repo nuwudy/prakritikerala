@@ -13,7 +13,7 @@
                             @foreach($cart as $variantId => $item)
                                 <li class="flex py-6 px-4 sm:px-6">
                                     <div class="flex-shrink-0 w-24 h-24 border border-gray-200 rounded-md overflow-hidden bg-gray-100">
-                                        <img src="{{ $item['image'] ? Storage::disk('public')->url($item['image']) : 'https://placehold.co/200x200/e2e8f0/475569?text=No+Image' }}" alt="{{ $item['name'] }}" class="w-full h-full object-center object-cover">
+                                        <img src="{{ $item['image'] ?: 'https://placehold.co/200x200/e2e8f0/475569?text=No+Image' }}" alt="{{ $item['name'] }}" class="w-full h-full object-center object-cover">
                                     </div>
 
                                     <div class="ml-4 flex-1 flex flex-col justify-between">

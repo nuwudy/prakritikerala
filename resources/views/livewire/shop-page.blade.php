@@ -85,7 +85,7 @@
                             @php
                                 $defaultVariant = $product->variants->where('is_default', true)->first() ?? $product->variants->first();
                                 $price = $defaultVariant ? $defaultVariant->price : null;
-                                $imageUrl = $product->image ? Storage::disk('public')->url($product->image) : 'https://placehold.co/400x500/e2e8f0/475569?text=No+Image';
+                                $imageUrl = $product->mainImage ? $product->mainImage->url : 'https://placehold.co/400x500/e2e8f0/475569?text=No+Image';
                             @endphp
 
                             <div wire:key="product-{{ $product->id }}" class="group relative bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col h-full">

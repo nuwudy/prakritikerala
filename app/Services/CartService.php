@@ -29,7 +29,7 @@ class CartService
                 'name' => $variant->product->name,
                 'weight' => $variant->weight,
                 'price' => $variant->price,
-                'image' => $variant->product->image,
+                'image' => $variant->product->mainImage ? $variant->product->mainImage->url : null,
                 'quantity' => $quantity,
             ];
         }
