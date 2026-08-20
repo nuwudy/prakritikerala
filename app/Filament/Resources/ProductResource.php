@@ -6,7 +6,7 @@ use App\Filament\Resources\ProductResource\Pages;
 use App\Filament\Resources\ProductResource\RelationManagers;
 use App\Models\Product;
 use Filament\Forms;
-use Filament\Forms\Form;
+use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
 use Filament\Tables\Table;
 use Filament\Tables;
@@ -19,22 +19,14 @@ class ProductResource extends Resource
     protected static ?string $navigationLabel = 'Products';
     protected static string|\UnitEnum|null $navigationGroup = 'Catalog';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
-                Forms\Components\Select::make('category_id')
-                    ->relationship('category', 'name')
-                    ->required()
-                    ->searchable()
-                    ->preload(),
                 Forms\Components\TextInput::make('name')
                     ->required()
-                    ->maxLength(255)
-                    ->live(onBlur: true)
-                    ->afterStateUpdated(fn (string $operation, $state, Forms\Set $set) => $operation === 'create' ? $set('slug', \Illuminate\Support\Str::slug($state)) : null),
+                    ->maxLength(255),
                 Forms\Components\TextInput::make('slug')
-                    ->required()
                     ->unique(table: Product::class, column: 'slug', ignoreRecord: true)
                     ->maxLength(255),
                 Forms\Components\Textarea::make('description')
@@ -55,11 +47,6 @@ class ProductResource extends Resource
                     ->directory('product-images')
                     ->acceptedFileTypes(['image/webp', 'image/jpeg', 'image/png'])
                     ->maxSize(2048),
-                Forms\Components\FileUpload::make('video_url')
-                    ->label('Product Short Video')
-                    ->directory('product-videos')
-                    ->acceptedFileTypes(['video/mp4', 'video/webm', 'video/quicktime'])
-                    ->maxSize(51200),
                 Forms\Components\FileUpload::make('images')
                     ->label('Gallery Images')
                     ->image()
@@ -67,6 +54,10 @@ class ProductResource extends Resource
                     ->directory('product-images')
                     ->acceptedFileTypes(['image/webp', 'image/jpeg', 'image/png'])
                     ->maxSize(2048),
+                Forms\Components\TextInput::make('video_url')
+                    ->label('Video Embed URL (YouTube/Vimeo)')
+                    ->url()
+                    ->maxLength(255),
             ]);
     }
 

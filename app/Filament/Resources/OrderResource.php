@@ -5,7 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\OrderResource\Pages;
 use App\Models\Order;
 use Filament\Forms;
-use Filament\Forms\Form;
+use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
 use Filament\Tables\Table;
 use Filament\Tables;
@@ -17,7 +17,7 @@ class OrderResource extends Resource
     protected static ?string $navigationLabel = 'Orders';
     protected static string|\UnitEnum|null $navigationGroup = 'Sales';
 
-    public static function form(Form $schema): Form
+    public static function form(Schema $schema): Schema
     {
         return $schema->schema([
             Forms\Components\Select::make('customer_id')

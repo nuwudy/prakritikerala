@@ -4,7 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Models\Category;
 use Filament\Forms;
-use Filament\Forms\Form;
+use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
 use Filament\Tables\Table;
 use Filament\Tables;
@@ -22,18 +22,12 @@ class CategoryResource extends Resource
 
     protected static ?string $slug = 'categories';
 
-    public static function form(Form $schema): Form
+    public static function form(Schema $schema): Schema
     {
         return $schema
             ->schema([
                 TextInput::make('name')
                     ->required()
-                    ->maxLength(255)
-                    ->live(onBlur: true)
-                    ->afterStateUpdated(fn (string $operation, $state, Forms\Set $set) => $operation === 'create' ? $set('slug', \Illuminate\Support\Str::slug($state)) : null),
-                TextInput::make('slug')
-                    ->required()
-                    ->unique(table: Category::class, column: 'slug', ignoreRecord: true)
                     ->maxLength(255),
             ]);
     }
