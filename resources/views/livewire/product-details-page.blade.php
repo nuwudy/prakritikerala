@@ -13,7 +13,7 @@
         <div class="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
             
             <!-- Image & Media Section -->
-            <div class="lg:max-w-lg lg:self-end" x-data="{ activeImage: '{{ $product->image ? asset('storage/'.$product->image) : 'https://placehold.co/800x1000/e2e8f0/475569?text=No+Image' }}' }">
+            <div class="lg:max-w-lg lg:self-end" x-data="{ activeImage: '{{ $product->image ? Storage::disk('public')->url($product->image) : 'https://placehold.co/800x1000/e2e8f0/475569?text=No+Image' }}' }">
                 <!-- Main Image -->
                 <div class="aspect-[4/5] rounded-2xl overflow-hidden bg-gray-100 shadow-sm border border-gray-100 mb-4">
                     <img x-bind:src="activeImage" alt="{{ $product->name }}" class="w-full h-full object-cover object-center transition-all duration-300">
@@ -24,15 +24,15 @@
                 <div class="grid grid-cols-4 gap-4">
                     <!-- Primary image thumbnail -->
                     @if($product->image)
-                    <button @click="activeImage = '{{ asset('storage/'.$product->image) }}'" type="button" class="aspect-square rounded-lg overflow-hidden bg-gray-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 ring-offset-1">
-                        <img src="{{ asset('storage/'.$product->image) }}" class="w-full h-full object-cover" alt="Thumbnail">
+                    <button @click="activeImage = '{{ Storage::disk('public')->url($product->image) }}'" type="button" class="aspect-square rounded-lg overflow-hidden bg-gray-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 ring-offset-1">
+                        <img src="{{ Storage::disk('public')->url($product->image) }}" class="w-full h-full object-cover" alt="Thumbnail">
                     </button>
                     @endif
                     
                     <!-- Additional Gallery images -->
                     @foreach($product->images as $galleryImage)
-                    <button @click="activeImage = '{{ asset('storage/'.$galleryImage) }}'" type="button" class="aspect-square rounded-lg overflow-hidden bg-gray-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 ring-offset-1">
-                        <img src="{{ asset('storage/'.$galleryImage) }}" class="w-full h-full object-cover" alt="Thumbnail">
+                    <button @click="activeImage = '{{ Storage::disk('public')->url($galleryImage) }}'" type="button" class="aspect-square rounded-lg overflow-hidden bg-gray-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 ring-offset-1">
+                        <img src="{{ Storage::disk('public')->url($galleryImage) }}" class="w-full h-full object-cover" alt="Thumbnail">
                     </button>
                     @endforeach
                 </div>
@@ -58,7 +58,7 @@
                             <iframe class="w-full h-full" src="https://player.vimeo.com/video/{{ $videoId }}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                         @else
                             @php
-                                $videoSrc = str_starts_with($product->video_url, 'http') ? $product->video_url : asset('storage/' . $product->video_url);
+                                $videoSrc = str_starts_with($product->video_url, 'http') ? $product->video_url : Storage::disk('public')->url($product->video_url);
                             @endphp
                             <video class="w-full h-full object-cover" controls>
                                 <source src="{{ $videoSrc }}" type="video/mp4">
