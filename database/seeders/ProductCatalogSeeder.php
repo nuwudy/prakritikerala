@@ -60,6 +60,7 @@ class ProductCatalogSeeder extends Seeder
                     'seo_description' => "Buy $productName – 100% natural, preservative‑free.",
                     'is_active' => true,
                     'image' => 'images/placeholder_spice.jpg',
+'images' => json_encode(['images/placeholder_spice.jpg']),
                 ]);
 
                 foreach ($weights as $weight) {
