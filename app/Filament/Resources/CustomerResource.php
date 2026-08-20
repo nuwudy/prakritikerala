@@ -5,7 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\CustomerResource\Pages;
 use App\Models\Customer;
 use Filament\Forms;
-use Filament\Schemas\Schema;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables\Table;
 use Filament\Tables;
@@ -17,7 +17,7 @@ class CustomerResource extends Resource
     protected static ?string $navigationLabel = 'Customers';
     protected static string|\UnitEnum|null $navigationGroup = 'Sales';
 
-    public static function form(Schema $schema): Schema
+    public static function form(Form $schema): Form
     {
         return $schema->schema([
             Forms\Components\TextInput::make('name')
