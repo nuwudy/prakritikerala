@@ -10,6 +10,7 @@ use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
 use Filament\Tables\Table;
 use Filament\Tables;
+use Illuminate\Support\Str;
 
 class ProductResource extends Resource
 {
@@ -23,9 +24,16 @@ class ProductResource extends Resource
     {
         return $schema
             ->schema([
+                Forms\Components\Select::make('category_id')
+                    ->relationship('category', 'name')
+                    ->required()
+                    ->searchable()
+                    ->preload(),
                 Forms\Components\TextInput::make('name')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->live(onBlur: true)
+                    ->afterStateUpdated(fn (callable $set, ?string $state) => $set('slug', Str::slug($state ?? ''))),
                 Forms\Components\TextInput::make('slug')
                     ->unique(table: Product::class, column: 'slug', ignoreRecord: true)
                     ->maxLength(255),
@@ -54,10 +62,12 @@ class ProductResource extends Resource
                     ->directory('product-images')
                     ->acceptedFileTypes(['image/webp', 'image/jpeg', 'image/png'])
                     ->maxSize(2048),
-                Forms\Components\TextInput::make('video_url')
-                    ->label('Video Embed URL (YouTube/Vimeo)')
-                    ->url()
-                    ->maxLength(255),
+                Forms\Components\FileUpload::make('video_url')
+                    ->label('Product Video')
+                    ->directory('product-videos')
+                    ->acceptedFileTypes(['video/mp4', 'video/webm', 'video/ogg'])
+                    ->maxSize(51200), // 50MB max size for video
+
             ]);
     }
 
