@@ -29,6 +29,11 @@ class CategoryResource extends Resource
                 TextInput::make('name')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\FileUpload::make('image')
+                    ->image()
+                    ->disk('public')
+                    ->directory('category-images')
+                    ->label('Category Image'),
             ]);
     }
 

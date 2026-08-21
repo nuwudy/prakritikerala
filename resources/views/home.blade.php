@@ -42,7 +42,7 @@
                 <a href="{{ route('shop', ['category' => $category->slug]) }}" class="group flex flex-col items-center">
                     <div class="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden mb-4 border-4 border-white shadow-lg group-hover:shadow-xl group-hover:border-kerala-green transition duration-300">
                         @if($category->image)
-                        <img src="{{ asset('images/' . $category->image) }}" alt="{{ $category->name }}" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                        <img src="{{ Str::startsWith($category->image, 'category-images/') ? Storage::url($category->image) : asset('images/' . $category->image) }}" alt="{{ $category->name }}" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
                         @else
                         <div class="w-full h-full bg-gray-100 flex items-center justify-center text-kerala-green">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
