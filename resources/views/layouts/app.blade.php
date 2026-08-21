@@ -19,14 +19,14 @@
 
     <!-- Open Graph / Social Share -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Prakriti Kerala – The Gateway to Authenticity">
-    <meta property="og:description" content="Authentic, preservative‑free traditional Kerala foods. Experience nature's original taste.">
-    <meta property="og:image" content="{{ asset('images/social-share.jpg') }}">
+    <meta property="og:title" content="@yield('og_title', 'Prakriti Kerala – The Gateway to Authenticity')">
+    <meta property="og:description" content="@yield('og_description', 'Authentic, preservative‑free traditional Kerala foods. Experience nature\'s original taste.')">
+    <meta property="og:image" content="@yield('og_image', asset('images/social-share.jpg'))">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Prakriti Kerala – The Gateway to Authenticity">
-    <meta name="twitter:description" content="Authentic, preservative‑free traditional Kerala foods. Experience nature's original taste.">
-    <meta name="twitter:image" content="{{ asset('images/social-share.jpg') }}">
+    <meta name="twitter:title" content="@yield('og_title', 'Prakriti Kerala – The Gateway to Authenticity')">
+    <meta name="twitter:description" content="@yield('og_description', 'Authentic, preservative‑free traditional Kerala foods. Experience nature\'s original taste.')">
+    <meta name="twitter:image" content="@yield('og_image', asset('images/social-share.jpg'))">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://cdn.tailwindcss.com"></script>

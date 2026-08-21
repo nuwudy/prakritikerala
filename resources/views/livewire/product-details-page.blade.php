@@ -1,3 +1,9 @@
+@section('og_title', $product->name . ' - Prakriti Kerala')
+@section('og_description', Str::limit(strip_tags($product->description), 150))
+@if($product->mainImage)
+    @section('og_image', $product->mainImage->url)
+@endif
+
 <div class="bg-white min-h-screen py-12 font-sans">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
