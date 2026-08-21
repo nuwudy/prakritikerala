@@ -80,6 +80,26 @@
                 <a href="{{ url('/shop') }}" class="bg-kerala-spice text-white px-5 py-2 rounded-full font-medium hover:bg-orange-700 transition transform hover:scale-105 shadow-md hidden sm:inline-block">
                     Shop Now
                 </a>
+                
+                <!-- Hamburger Button (Mobile Only) -->
+                <button id="mobile-menu-btn" class="md:hidden text-kerala-dark hover:text-kerala-spice focus:outline-none">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path id="menu-icon-path" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur-md border-t border-gray-100 shadow-lg absolute w-full left-0 top-full transition-all duration-300 origin-top">
+            <div class="px-6 py-4 space-y-4 flex flex-col">
+                <a href="{{ url('/') }}" class="text-kerala-dark font-medium hover:text-kerala-spice transition block text-lg">Home</a>
+                <a href="{{ url('/shop') }}" class="text-kerala-dark font-medium hover:text-kerala-spice transition block text-lg">Shop</a>
+                <a href="{{ route('our-story') }}" class="text-kerala-dark font-medium hover:text-kerala-spice transition block text-lg">Our Story</a>
+                <a href="{{ route('contact') }}" class="text-kerala-dark font-medium hover:text-kerala-spice transition block text-lg">Contact</a>
+                <a href="{{ url('/shop') }}" class="bg-kerala-spice text-white px-5 py-3 rounded-full font-medium text-center hover:bg-orange-700 transition block mt-4 sm:hidden">
+                    Shop Now
+                </a>
             </div>
         </div>
     </header>
@@ -156,7 +176,7 @@
         </div>
     </footer>
 
-    <!-- Header scroll script -->
+    <!-- Header scroll and mobile menu script -->
     <script>
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
@@ -166,6 +186,22 @@
             } else {
                 header.classList.add('py-4', 'bg-white/70');
                 header.classList.remove('py-2', 'bg-white/90');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIconPath = document.getElementById('menu-icon-path');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            
+            // Switch icon between hamburger and X
+            if (mobileMenu.classList.contains('hidden')) {
+                menuIconPath.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+            } else {
+                menuIconPath.setAttribute('d', 'M6 18L18 6M6 6l12 12');
             }
         });
     </script>
