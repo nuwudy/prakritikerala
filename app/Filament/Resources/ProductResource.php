@@ -37,8 +37,21 @@ class ProductResource extends Resource
                 Forms\Components\TextInput::make('slug')
                     ->unique(table: Product::class, column: 'slug', ignoreRecord: true)
                     ->maxLength(255),
-                Forms\Components\Textarea::make('description')
-                    ->rows(4),
+                Forms\Components\RichEditor::make('description')
+                    ->toolbarButtons([
+                        'blockquote', 'bold', 'bulletList', 'h2', 'h3', 'italic', 'link', 'orderedList', 'redo', 'strike', 'undo',
+                    ])
+                    ->columnSpanFull(),
+                Forms\Components\RichEditor::make('ingredients')
+                    ->toolbarButtons([
+                        'bold', 'bulletList', 'italic', 'redo', 'undo',
+                    ])
+                    ->columnSpanFull(),
+                Forms\Components\RichEditor::make('how_to_use')
+                    ->toolbarButtons([
+                        'bold', 'bulletList', 'italic', 'orderedList', 'redo', 'undo',
+                    ])
+                    ->columnSpanFull(),
                 Forms\Components\TextInput::make('seo_title')
                     ->maxLength(255),
                 Forms\Components\Textarea::make('seo_description')

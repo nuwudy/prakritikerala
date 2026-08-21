@@ -65,12 +65,58 @@
                     </p>
                 </div>
 
-                <!-- Description -->
-                <div class="mt-6">
-                    <h3 class="sr-only">Description</h3>
-                    <div class="text-base text-gray-700 space-y-6">
-                        <p>{{ $product->description }}</p>
+                <!-- Product Details Accordion -->
+                <div class="mt-8 border-t border-gray-200 divide-y divide-gray-200" x-data="{ activeAccordion: 'description' }">
+                    
+                    <!-- Description -->
+                    <div class="py-4">
+                        <button @click="activeAccordion = activeAccordion === 'description' ? '' : 'description'" class="flex w-full items-center justify-between text-left focus:outline-none">
+                            <span class="text-base font-medium text-gray-900">Description</span>
+                            <span class="ml-6 flex items-center">
+                                <svg class="h-5 w-5 text-gray-400 transition-transform duration-200" :class="{ 'rotate-180': activeAccordion === 'description' }" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </span>
+                        </button>
+                        <div x-show="activeAccordion === 'description'" x-collapse x-cloak class="mt-4 prose prose-sm sm:prose text-gray-700 max-w-none">
+                            {!! $product->description !!}
+                        </div>
                     </div>
+
+                    <!-- Ingredients -->
+                    @if($product->ingredients)
+                    <div class="py-4">
+                        <button @click="activeAccordion = activeAccordion === 'ingredients' ? '' : 'ingredients'" class="flex w-full items-center justify-between text-left focus:outline-none">
+                            <span class="text-base font-medium text-gray-900">Ingredients</span>
+                            <span class="ml-6 flex items-center">
+                                <svg class="h-5 w-5 text-gray-400 transition-transform duration-200" :class="{ 'rotate-180': activeAccordion === 'ingredients' }" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </span>
+                        </button>
+                        <div x-show="activeAccordion === 'ingredients'" x-collapse x-cloak class="mt-4 prose prose-sm sm:prose text-gray-700 max-w-none">
+                            {!! $product->ingredients !!}
+                        </div>
+                    </div>
+                    @endif
+
+                    <!-- How to Use -->
+                    @if($product->how_to_use)
+                    <div class="py-4">
+                        <button @click="activeAccordion = activeAccordion === 'how_to_use' ? '' : 'how_to_use'" class="flex w-full items-center justify-between text-left focus:outline-none">
+                            <span class="text-base font-medium text-gray-900">How to Use</span>
+                            <span class="ml-6 flex items-center">
+                                <svg class="h-5 w-5 text-gray-400 transition-transform duration-200" :class="{ 'rotate-180': activeAccordion === 'how_to_use' }" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </span>
+                        </button>
+                        <div x-show="activeAccordion === 'how_to_use'" x-collapse x-cloak class="mt-4 prose prose-sm sm:prose text-gray-700 max-w-none">
+                            {!! $product->how_to_use !!}
+                        </div>
+                    </div>
+                    @endif
+
                 </div>
 
                 <div class="mt-10">

@@ -16,6 +16,8 @@ class Product extends Model
         'name',
         'slug',
         'description',
+        'ingredients',
+        'how_to_use',
         'seo_title',
         'seo_description',
         'is_active',
