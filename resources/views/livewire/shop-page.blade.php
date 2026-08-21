@@ -111,7 +111,7 @@
                                     
                                     <div class="mt-auto pt-4 flex items-center justify-between">
                                         <p class="text-xl font-bold text-gray-900">
-                                            @if($price)
+                                            @if(!is_null($price))
                                                 ₹{{ number_format($price, 2) }}
                                             @else
                                                 <span class="text-sm text-gray-500 font-normal">Pricing unavailable</span>
