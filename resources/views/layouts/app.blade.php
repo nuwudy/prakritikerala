@@ -11,6 +11,23 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;700;800&display=swap" rel="stylesheet">
     
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+
+    <!-- Open Graph / Social Share -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Prakriti Kerala – The Gateway to Authenticity">
+    <meta property="og:description" content="Authentic, preservative‑free traditional Kerala foods. Experience nature's original taste.">
+    <meta property="og:image" content="{{ asset('images/social-share.jpg') }}">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Prakriti Kerala – The Gateway to Authenticity">
+    <meta name="twitter:description" content="Authentic, preservative‑free traditional Kerala foods. Experience nature's original taste.">
+    <meta name="twitter:image" content="{{ asset('images/social-share.jpg') }}">
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -40,7 +57,12 @@
     <!-- Header / Nav -->
     <header class="fixed w-full top-0 z-50 transition-all duration-300 bg-white/70 backdrop-blur-md shadow-sm">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="{{ url('/') }}" class="text-2xl font-heading font-bold text-kerala-green tracking-tight">Prakriti Kerala</a>
+            <a href="{{ url('/') }}" class="flex items-center">
+                <img src="{{ asset('images/logo.svg') }}" alt="Prakriti Kerala Logo" class="h-10 md:h-12 w-auto">
+                <!-- If you want to keep text alongside the logo, uncomment the span below -->
+                <!-- <span class="ml-2 text-2xl font-heading font-bold text-kerala-green tracking-tight hidden sm:block">Prakriti Kerala</span> -->
+                <span class="sr-only">Prakriti Kerala</span>
+            </a>
             <nav class="hidden md:flex space-x-8">
                 <a href="{{ url('/') }}" class="text-kerala-dark font-medium hover:text-kerala-spice transition">Home</a>
                 <a href="{{ url('/shop') }}" class="text-kerala-dark font-medium hover:text-kerala-spice transition">Shop</a>
@@ -74,7 +96,11 @@
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-5 gap-8 mb-12">
                 <div class="col-span-1 md:col-span-2">
-                    <a href="{{ url('/') }}" class="text-3xl font-heading font-bold text-white tracking-tight mb-4 inline-block">Prakriti Kerala</a>
+                    <a href="{{ url('/') }}" class="inline-block mb-4">
+                        <!-- Replace with a white/light version of your logo if needed for the dark footer -->
+                        <img src="{{ asset('images/logo.svg') }}" alt="Prakriti Kerala Logo" class="h-10 md:h-12 w-auto">
+                        <span class="sr-only">Prakriti Kerala</span>
+                    </a>
                     <p class="text-gray-400 mb-6 max-w-md text-sm">
                         Bringing the essence of Kerala's vibrant nature and rich spice heritage directly to your home. The Gateway to Authenticity.
                     </p>
