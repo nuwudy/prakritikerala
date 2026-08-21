@@ -12,7 +12,6 @@ class Product extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'category_id',
         'name',
         'slug',
         'description',
@@ -33,9 +32,9 @@ class Product extends Model
     ];
 
     /** Relationships */
-    public function category()
+    public function categories()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsToMany(Category::class);
     }
 
     public function variants()

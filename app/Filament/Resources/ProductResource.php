@@ -24,8 +24,9 @@ class ProductResource extends Resource
     {
         return $schema
             ->schema([
-                Forms\Components\Select::make('category_id')
-                    ->relationship('category', 'name')
+                Forms\Components\Select::make('categories')
+                    ->relationship('categories', 'name')
+                    ->multiple()
                     ->required()
                     ->searchable()
                     ->preload(),
@@ -80,7 +81,7 @@ class ProductResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('id')->sortable(),
                 Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('category.name')->label('Category')->searchable(),
+                Tables\Columns\TextColumn::make('categories.name')->label('Categories')->searchable()->badge(),
                 Tables\Columns\IconColumn::make('is_active')->boolean()->sortable(),
                 Tables\Columns\TextColumn::make('picked_for_you_order')->sortable(),
                 \Awcodes\Curator\Components\Tables\CuratorColumn::make('image')
@@ -88,8 +89,9 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('created_at')->dateTime()->sortable(),
             ])
             ->filters([
-                Tables\Filters\SelectFilter::make('category')
-                    ->relationship('category', 'name'),
+                Tables\Filters\SelectFilter::make('categories')
+                    ->relationship('categories', 'name')
+                    ->multiple(),
                 Tables\Filters\TernaryFilter::make('is_active'),
             ])
             ->actions([

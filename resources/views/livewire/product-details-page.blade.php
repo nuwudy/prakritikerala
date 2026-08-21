@@ -62,7 +62,7 @@
             <!-- Product Info Section -->
             <div class="mt-10 px-4 sm:px-0 lg:mt-0">
                 <h1 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">{{ $product->name }}</h1>
-                <p class="mt-2 text-sm text-gray-500 uppercase tracking-wider font-semibold">{{ $product->category->name ?? 'Uncategorized' }}</p>
+                <p class="mt-2 text-sm text-gray-500 uppercase tracking-wider font-semibold">{{ $product->categories->pluck('name')->join(', ') ?: 'Uncategorized' }}</p>
 
                 <div class="mt-6">
                     <h2 class="sr-only">Product information</h2>

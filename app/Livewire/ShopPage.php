@@ -51,7 +51,7 @@ class ShopPage extends Component
 
     public function render()
     {
-        $query = Product::active()->with(['category', 'variants']);
+        $query = Product::active()->with(['categories', 'variants']);
 
         if ($this->search) {
             $query->where(function($q) {
@@ -61,7 +61,7 @@ class ShopPage extends Component
         }
 
         if ($this->category) {
-            $query->whereHas('category', function ($q) {
+            $query->whereHas('categories', function ($q) {
                 $q->where('slug', $this->category);
             });
         }

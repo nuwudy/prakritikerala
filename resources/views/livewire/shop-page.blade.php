@@ -103,7 +103,7 @@
 
                                 <div class="p-5 flex flex-col flex-grow">
                                     <div class="mb-2">
-                                        <span class="text-xs font-medium text-gray-400 uppercase tracking-wider">{{ $product->category->name ?? 'Uncategorized' }}</span>
+                                        <span class="text-xs font-medium text-gray-400 uppercase tracking-wider">{{ $product->categories->pluck('name')->join(', ') ?: 'Uncategorized' }}</span>
                                     </div>
                                     <a href="/product/{{ $product->slug }}" class="block mb-2">
                                         <h3 class="text-lg font-semibold text-gray-900 group-hover:text-emerald-600 transition-colors line-clamp-2">{{ $product->name }}</h3>
