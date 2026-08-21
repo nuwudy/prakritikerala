@@ -20,7 +20,7 @@ class ProductDetailsPage extends Component
     public function mount($slug)
     {
         $this->product = Product::where('slug', $slug)
-            ->with(['variants', 'category', 'approvedReviews'])
+            ->with(['variants', 'categories', 'approvedReviews'])
             ->firstOrFail();
 
         $defaultVariant = $this->product->variants->where('is_default', true)->first() 
