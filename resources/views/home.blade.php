@@ -76,6 +76,7 @@
                     </div>
                     <div class="p-6 flex flex-col flex-grow relative">
                         <h3 class="text-xl font-heading font-semibold mb-2 text-kerala-dark">{{ $product->name }}</h3>
+                        <p class="text-gray-500 text-sm mb-6 flex-grow">{{ Str::limit(strip_tags($product->description), 80) }}</p>
                         
                         <div class="flex items-center justify-between mt-auto pt-4">
                             <span class="text-xs font-semibold text-kerala-green bg-green-50 px-3 py-1 rounded-full">Top Pick</span>
