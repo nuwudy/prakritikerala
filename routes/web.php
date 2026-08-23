@@ -8,11 +8,11 @@ Route::get('/', function () {
     $pickedForYouProducts = \App\Models\Product::active()
         ->whereNotNull('picked_for_you_order')
         ->orderBy('picked_for_you_order', 'asc')
-        ->take(4)
+        ->take(12)
         ->get();
 
-    $trendingProducts = \App\Models\Product::active()->inRandomOrder()->take(3)->get();
-    $latestProducts = \App\Models\Product::active()->latest()->take(3)->get();
+    $trendingProducts = \App\Models\Product::active()->inRandomOrder()->take(12)->get();
+    $latestProducts = \App\Models\Product::active()->latest()->take(12)->get();
     return view('home', compact('categories', 'pickedForYouProducts', 'trendingProducts', 'latestProducts'));
 });
 
