@@ -96,6 +96,8 @@
                 @endforeach
                 </div>
                 <div class="swiper-pagination"></div>
+                <div class="swiper-button-next !text-kerala-green after:!text-xl"></div>
+                <div class="swiper-button-prev !text-kerala-green after:!text-xl"></div>
             </div>
         </div>
     </section>
@@ -146,6 +148,8 @@
                 @endforelse
                 </div>
                 <div class="swiper-pagination"></div>
+                <div class="swiper-button-next !text-kerala-green after:!text-xl"></div>
+                <div class="swiper-button-prev !text-kerala-green after:!text-xl"></div>
             </div>
             
             <div class="text-center mt-16">
@@ -202,6 +206,8 @@
                 @endforelse
                 </div>
                 <div class="swiper-pagination"></div>
+                <div class="swiper-button-next !text-kerala-green after:!text-xl"></div>
+                <div class="swiper-button-prev !text-kerala-green after:!text-xl"></div>
             </div>
             
             <div class="text-center mt-16">
@@ -269,7 +275,7 @@
 
     @push('scripts')
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        function initSwipers() {
             const commonOptions = {
                 slidesPerView: 1,
                 spaceBetween: 20,
@@ -277,7 +283,15 @@
                     el: '.swiper-pagination',
                     clickable: true,
                 },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
                 grabCursor: true,
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                }
             };
 
             new Swiper('.picked-swiper', {
@@ -299,7 +313,10 @@
 
             new Swiper('.trending-swiper', options3Cols);
             new Swiper('.latest-swiper', options3Cols);
-        });
+        }
+
+        document.addEventListener('DOMContentLoaded', initSwipers);
+        document.addEventListener('livewire:navigated', initSwipers);
     </script>
     <style>
         .swiper-pagination-bullet-active {
