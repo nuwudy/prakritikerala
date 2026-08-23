@@ -104,7 +104,7 @@
         </div>
     </header>
 
-    <main>
+    <main class="pt-20 md:pt-24">
         @yield('content')
         @isset($slot)
             {{ $slot }}
