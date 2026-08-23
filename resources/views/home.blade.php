@@ -68,8 +68,10 @@
                 <p class="text-gray-600">A curated selection of our finest authentic products.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+            <div class="swiper picked-swiper !pb-12 px-2">
+                <div class="swiper-wrapper">
                 @foreach($pickedForYouProducts as $product)
+                <div class="swiper-slide h-auto">
                 <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition duration-500 transform hover:-translate-y-2 group flex flex-col h-full border border-gray-100">
                     <a href="{{ route('product.show', $product->slug) }}" class="relative h-64 overflow-hidden bg-gray-100 block">
                         <img src="{{ $product->mainImage ? $product->mainImage->url : 'https://placehold.co/400x500/e2e8f0/475569?text=No+Image' }}" alt="{{ $product->name }}" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
@@ -90,7 +92,10 @@
                         </div>
                     </div>
                 </div>
+                </div>
                 @endforeach
+                </div>
+                <div class="swiper-pagination"></div>
             </div>
         </div>
     </section>
@@ -104,8 +109,10 @@
                 <p class="text-gray-600">Discover our most popular premium spices and oils, loved by our community.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div class="swiper trending-swiper !pb-12 px-2">
+                <div class="swiper-wrapper">
                 @forelse($trendingProducts as $product)
+                <div class="swiper-slide h-auto">
                 <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition duration-500 transform hover:-translate-y-2 group flex flex-col h-full border border-gray-100">
                     <a href="{{ route('product.show', $product->slug) }}" class="relative h-72 overflow-hidden bg-gray-100 block">
                         <img src="{{ $product->mainImage ? $product->mainImage->url : 'https://placehold.co/400x500/e2e8f0/475569?text=No+Image' }}" alt="{{ $product->name }}" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
@@ -131,11 +138,14 @@
                         </div>
                     </div>
                 </div>
+                </div>
                 @empty
-                <div class="col-span-full text-center py-12">
+                <div class="swiper-slide w-full text-center py-12">
                     <p class="text-xl text-gray-500">No products available at the moment.</p>
                 </div>
                 @endforelse
+                </div>
+                <div class="swiper-pagination"></div>
             </div>
             
             <div class="text-center mt-16">
@@ -157,8 +167,10 @@
                 <p class="text-gray-600">Explore the newest additions to our authentic Kerala collection.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div class="swiper latest-swiper !pb-12 px-2">
+                <div class="swiper-wrapper">
                 @forelse($latestProducts as $product)
+                <div class="swiper-slide h-auto">
                 <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition duration-500 transform hover:-translate-y-2 group flex flex-col h-full border border-gray-100">
                     <a href="{{ route('product.show', $product->slug) }}" class="relative h-72 overflow-hidden bg-gray-100 block">
                         <img src="{{ $product->mainImage ? $product->mainImage->url : 'https://placehold.co/400x500/e2e8f0/475569?text=No+Image' }}" alt="{{ $product->name }}" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
@@ -182,11 +194,14 @@
                         </div>
                     </div>
                 </div>
+                </div>
                 @empty
-                <div class="col-span-full text-center py-12">
+                <div class="swiper-slide w-full text-center py-12">
                     <p class="text-xl text-gray-500">No new arrivals at the moment.</p>
                 </div>
                 @endforelse
+                </div>
+                <div class="swiper-pagination"></div>
             </div>
             
             <div class="text-center mt-16">
@@ -251,4 +266,45 @@
             </div>
         </div>
     </section>
+
+    @push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const commonOptions = {
+                slidesPerView: 1,
+                spaceBetween: 20,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                grabCursor: true,
+            };
+
+            new Swiper('.picked-swiper', {
+                ...commonOptions,
+                breakpoints: {
+                    640: { slidesPerView: 2, spaceBetween: 20 },
+                    1024: { slidesPerView: 3, spaceBetween: 30 },
+                    1280: { slidesPerView: 4, spaceBetween: 40 },
+                }
+            });
+
+            const options3Cols = {
+                ...commonOptions,
+                breakpoints: {
+                    640: { slidesPerView: 2, spaceBetween: 20 },
+                    1024: { slidesPerView: 3, spaceBetween: 40 },
+                }
+            };
+
+            new Swiper('.trending-swiper', options3Cols);
+            new Swiper('.latest-swiper', options3Cols);
+        });
+    </script>
+    <style>
+        .swiper-pagination-bullet-active {
+            background: #2C5530 !important; /* kerala-green */
+        }
+    </style>
+    @endpush
 @endsection
