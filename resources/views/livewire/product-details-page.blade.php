@@ -19,7 +19,7 @@
         <div class="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
             
             <!-- Image & Media Section -->
-            <div class="lg:max-w-lg lg:self-end" x-data="{ 
+            <div class="lg:max-w-lg lg:self-start" x-data="{ 
                 activeMediaUrl: '{{ $product->mainImage ? $product->mainImage->url : 'https://placehold.co/800x1000/e2e8f0/475569?text=No+Image' }}',
                 activeMediaType: 'image'
             }">
