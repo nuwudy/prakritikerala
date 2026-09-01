@@ -19,6 +19,8 @@ Route::get('/', function () {
 Route::get('/shop', \App\Livewire\ShopPage::class)->name('shop');
 Route::get('/product/{slug}', \App\Livewire\ProductDetailsPage::class)->name('product.show');
 Route::get('/cart', \App\Livewire\CartPage::class)->name('cart');
+Route::get('/checkout', \App\Livewire\CheckoutPage::class)->name('checkout');
+Route::get('/order-success/{order}', \App\Livewire\OrderSuccessPage::class)->name('order.success');
 Route::view('/our-story', 'our-story')->name('our-story');
 Route::view('/contact', 'contact')->name('contact');
 

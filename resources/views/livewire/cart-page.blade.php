@@ -83,12 +83,12 @@
                     </dl>
 
                     <div class="mt-6">
-                        <button type="button" class="w-full bg-emerald-600 border border-transparent rounded-lg shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-emerald-500">
+                        <a href="{{ route('checkout') }}" class="w-full inline-flex items-center justify-center bg-emerald-600 border border-transparent rounded-lg shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-emerald-500 transition-colors">
                             Proceed to Checkout
-                        </button>
+                        </a>
                         <p class="mt-3 text-xs text-center text-gray-500 flex items-center justify-center">
                             <svg class="w-4 h-4 mr-1 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-                            Secure Checkout (Razorpay Integration Coming Soon)
+                            Cash on Delivery & Secure Checkout Available
                         </p>
                     </div>
                 </div>
